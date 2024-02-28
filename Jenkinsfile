@@ -4,12 +4,23 @@ pipeline{
   environment {
 
       ArchiveDir = "/home/jenkinbuild"
-              repoUrl = "github.com/netsys-usa/FedNow-Simulator.git"
+              repoUrl = "https://github.com/SurenMalkist/jenkins"
 		          ProjectName = "Nats"
 
 	    }
       stages {
-        stage { 
+        stage('Code Checkout'){
+
+			            steps{
+
+			               	step([$class: 'WsCleanup'])
+
+			                		echo "Cloning the ${ProjectName} project from Github"
+					                checkout scm
+				                	//git credentialsId: 'guru-github-credentials', url: 'https://github.com/netsys-usa/PL_UI.git'
+					               echo "Code has been checked out into ${JENKINS_HOME}/workspace/${JOB_NAME} workspace..!"
+
+			            }
         
     
 
