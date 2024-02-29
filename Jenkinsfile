@@ -2,6 +2,7 @@ pipeline{
     agent any 
         
   environment {
+	  
 
       ArchiveDir = "/home/jenkinbuild"
               repoUrl = "https://github.com/SurenMalkist/jenkins"
