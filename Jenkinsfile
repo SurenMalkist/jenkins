@@ -11,7 +11,7 @@ pipeline {
                 script {
                     // Use the GIT_BRANCH parameter value to determine the branch to checkout
                     checkout([$class: 'GitSCM', branches: [[name: "${params.GIT_BRANCH}"]], 
-                              userRemoteConfigs: [[url: 'https://github.com/your/repository.git']]])
+                              userRemoteConfigs: [[url: 'https://github.com/SurenMalkist/jenkins']]])
                 }
             }
         }
