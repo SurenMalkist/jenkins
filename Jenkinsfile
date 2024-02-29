@@ -1,29 +1,20 @@
-pipeline{
-    agent any 
-        
-  environment {
-	  
+pipeline {
+    agent any
 
-      ArchiveDir = "/home/jenkinbuild"
-              repoUrl = "https://github.com/SurenMalkist/jenkins"
-		          ProjectName = "Nats"
+    parameters {
+        choice(name: 'GIT_BRANCH', choices: ['main', 'test1'], description: 'Select the git branch')
+    }
 
-	    }
-      stages {
-        stage('Code Checkout'){
-
-			            steps{
-
-			               	step([$class: 'WsCleanup'])
-
-			                		echo "Cloning the ${ProjectName} project from Github"
-					                checkout scm
-				                	//git credentialsId: 'guru-github-credentials', url: 'https://github.com/netsys-usa/PL_UI.git'
-					               echo "Code has been checked out into ${JENKINS_HOME}/workspace/${JOB_NAME} workspace..!"
-
-			            }
-        
-    
-
-
-
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Use the GIT_BRANCH parameter value to determine the branch to checkout
+                    checkout([$class: 'GitSCM', branches: [[name: "${params.GIT_BRANCH}"]], 
+                              userRemoteConfigs: [[url: 'https://github.com/your/repository.git']]])
+                }
+            }
+        }
+        // Add more stages as needed
+    }
+}
